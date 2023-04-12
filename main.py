@@ -7,7 +7,7 @@ openai.api_key = api_key
 def chat_chatgpt(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-4",  # Use the appropriate ChatGPT model ID
-        messages=[{"role": "system", "content": "You are a helpful assistant."},
+        messages=[{"role": "system", "content": "You are a helpful assistant."}, # Design your system prompt
                   {"role": "user", "content": prompt}],
         max_tokens=150,
         n=1,
