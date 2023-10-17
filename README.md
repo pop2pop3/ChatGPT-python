@@ -10,9 +10,9 @@ Here's a basic implementation of a chatbot using OpenAI's ChatGPT and the `opena
 First, install the required library:
 
 ```bash
-pip install openai
+pip install openai -U
 ```
-Run ```main.py``` by ```python3 main.py```
+Run ```main.py``` or ```streaming.py``` by ```python3 main.py``` or ```python3 streaming.py```
 That's it!
 
 We welcome contributions. If you have an idea for a new feature or have found a bug, please open an issue on the GitHub repository.
