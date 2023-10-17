@@ -1,7 +1,6 @@
 import openai
 
-with open("path-to-file/openai_api_key.txt") as key: # I use this method for a sake of organizing many API keys in a personal directory that I used in my projects
-    api_key = key.read()
+api_key = open("path-to-file/openai_api_key.txt").read() # I use this method for a sake of organizing many API keys in a personal directory that I used in my projects
 openai.api_key = api_key
 
 def chat_chatgpt(prompt):
