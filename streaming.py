@@ -3,6 +3,9 @@ import openai
 api_key = open("path-to-file/openai_api_key.txt").read() # I use this method for a sake of organizing many API keys in a personal directory that I used in my projects
 openai.api_key = api_key
 
+def colored(r, g, b, text):
+    return "\033[38;2;{};{};{}m{}\033[38;2;255;255;255m".format(r,g,b,text)
+
 def chat_chatgpt_stream(prompt):
 
     r"""
@@ -26,7 +29,9 @@ def chat_chatgpt_stream(prompt):
     for chunk in response:
         content = chunk['choices'][0].get('delta', {}).get('content')
         if content is not None:
-            print(str(content).replace("None", ""), end='', flush=True)
+            # print response with color
+            # R=218, G=165, B=32 will produce light orange color
+            print(colored(218,165,32, str(content).replace("None", "")), end='', flush=True)
             collected_chunk.append(content.replace("None", ""))
     final_response = "".join(collected_chunk) # Join all collected chunk messages into final response
     return final_response
