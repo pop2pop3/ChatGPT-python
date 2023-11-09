@@ -15,4 +15,10 @@ pip install openai -U
 Run ```main.py``` or ```streaming.py``` by ```python3 main.py``` or ```python3 streaming.py```
 That's it!
 
+# GPT-4-VISION (Updated)
+
+GPT-4 with Vision, sometimes referred to as GPT-4V or gpt-4-vision-preview in the API, allows the model to take in images and answer questions about them. Historically, language model systems have been limited by taking in a single input modality, text. For many use cases, this constrained the areas where models like GPT-4 could be used.
+
+GPT-4 with vision is currently available to all developers who have access to GPT-4 via the ```gpt-4-vision-preview``` model and the Chat Completions API which has been updated to support image inputs.
+
 We welcome contributions. If you have an idea for a new feature or have found a bug, please open an issue on the GitHub repository.
