@@ -8,7 +8,7 @@ from datetime import datetime
 from IPython.display import display, Image, Audio
 from imgcat import imgcat
 
-api_key = open("AuthKey/Auth_key.txt").read().strip()
+api_key = open("api_key_location/api_key.txt").read().strip()
 client = OpenAI(api_key=api_key)
 chat_completion = client.chat.completions
 
