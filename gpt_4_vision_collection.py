@@ -2,15 +2,23 @@ import cv2  # We're using OpenCV to read video
 import base64
 import time
 import os
+import io
 import requests
 from openai import OpenAI
 from datetime import datetime
 from IPython.display import display, Image, Audio
 from imgcat import imgcat
+from PIL import Image
 
 api_key = open("api_key_location/api_key.txt").read().strip()
 client = OpenAI(api_key=api_key)
 chat_completion = client.chat.completions
+
+def show_image(image_url: str):
+    content = requests.get(image_url)
+    im = Image.open(io.BytesIO(content.content))
+    print("\n")
+    return imgcat(im, width=36, height=12, preserve_aspect_ratio=False)
 
 def gpt_4_vision_media(media, query: str):
     r"""
@@ -62,7 +70,7 @@ def gpt_4_vision_mediaurl(image_url, query) -> str:
 
     `image_url`: image URL.
 
-    `query`: your query about the video.
+    `query`: your query about the image.
     """
     response = client.chat.completions.create(
     model="gpt-4-vision-preview",
@@ -80,7 +88,7 @@ def gpt_4_vision_mediaurl(image_url, query) -> str:
     ],
     max_tokens=500,
     )
-
+    show_image(image_url)
     return response.choices[0].message.content
 
 def gpt_4_vision_localmedia(file_location, query) -> str:
@@ -90,7 +98,7 @@ def gpt_4_vision_localmedia(file_location, query) -> str:
 
     `file_location`: image file location.
 
-    `query`: your query about the video.
+    `query`: your query about the image.
     """
 
     # Function to encode the image
