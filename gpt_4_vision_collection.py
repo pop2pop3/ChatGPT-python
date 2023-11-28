@@ -38,29 +38,22 @@ def gpt_4_vision_media(media, query: str):
         base64Frames.append(base64.b64encode(buffer).decode("utf-8"))
     video.release()
     print(len(base64Frames), "frames read.")
-    display_handle = display(None, display_id=True)
-    for img in base64Frames:
-        display_handle.update(Image(data=base64.b64decode(img.encode("utf-8"))))
-        time.sleep(0.025)
 
     PROMPT_MESSAGES = [
     {
         "role": "user",
         "content": [
             query, # Example: These are frames from a video that I want to upload. Generate a compelling description that I can upload along with the video.
-            *map(lambda x: {"image": x, "resize": 768}, base64Frames[0::10]),
+            *map(lambda x: {"image": x, "resize": 768}, base64Frames[0::10]), #set the frames to be uploaded accordingly.
         ],
     },
     ]
-    params = {
-        "model": "gpt-4-vision-preview",
-        "messages": PROMPT_MESSAGES,
-        "api_key": os.environ[api_key],
-        "headers": {"Openai-Version": "2020-11-07"},
-        "max_tokens": 300,
-    }
-
-    result = chat_completion.create(**params)
+    
+    result = openai.chat.completions.create(
+        model='gpt-4-vision-preview',
+        messages = PROMPT_MESSAGES,
+        max_tokens=600,
+    )
     return result.choices[0].message.content
 
 def gpt_4_vision_mediaurl(image_url, query) -> str:
